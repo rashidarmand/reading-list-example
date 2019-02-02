@@ -2,8 +2,12 @@ const express = require('express');
 const graphqlHTTP = require('express-graphql');
 const schema = require('./schema/schema');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const app = express();
+
+// allow cross origin requests
+app.use(cors());
 
 // Connect to MongoDB Atlas db cluster
 mongoose.connect('mongodb+srv://rashid-armand:Brooklyn_718@fcc-graphql-amwpq.mongodb.net/fcc-graphql?retryWrites=true', { useNewUrlParser: true });
