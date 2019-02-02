@@ -103,3 +103,7 @@ form button:active {
   box-sizing: border-box;
   color: white;
 }
+
+.other-books {
+  list-style-type: square;
+}

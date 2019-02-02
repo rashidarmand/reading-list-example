@@ -11,15 +11,19 @@ class BookList extends Component {
   handleClick = (id) => this.setState({ selected: id });
 
   displayBooks = () => {
-    const { data } = this.props;
-    if(data.loading) {
-      return <div>Loading Books...</div>;
-    } else {
-      return data.books.map(book => (
-        <li key={ book.id } onClick={ () => this.handleClick(book.id) }>{ book.name }</li>
-      ))
-    }
+    const { loading, books } = this.props.data;
+    return loading
+      ? <li>Loading Books...</li>
+      : books.map(({ id, name }) => (
+          <li 
+            key={ id } 
+            onClick={() => this.handleClick(id)}
+          >
+            { name }
+          </li>
+        ));
   }
+
   render() {
     return (
       <div>

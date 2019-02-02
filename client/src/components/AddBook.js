@@ -15,23 +15,22 @@ class AddBook extends Component {
     e.preventDefault();
     const emptyFields = Object.keys(this.state).some(key => this.state[key] === '');
     if(emptyFields) return;
-    
     this.props.addBookMutation({
       variables : { ...this.state },
       refetchQueries: [{ query: getBooksQuery }]
     });
+    clear();
   }
 
   displayAuthors = () => {
     const { loading, authors } = this.props.getAuthorsQuery;
-    if(loading) {
-      return <option>Loading Authors...</option>;
-    } else {
-      return authors.map(author => (
-        <option key={ author.id } value={ author.id }>{ author.name }</option>
-      ));
-    }
+    return loading
+      ? <option>Loading Authors...</option>
+      : authors.map(({ id, name }) => (
+          <option key={ id } value={ id }>{ name }</option>
+        ));
   }
+  
   render() {
     return (
       <form id='add-book' onSubmit={ this.handleSubmit }>
@@ -56,9 +55,15 @@ class AddBook extends Component {
   }
 }
 
-const Queries = compose(
+// Clear form fields after submitting.
+const clear = () => {
+  document.querySelector('select').selectedIndex = 0;
+  [...document.getElementsByTagName('input')].forEach(element => element.value = '');
+}
+
+const connectQueries = compose(
   graphql(getAuthorsQuery, { name: 'getAuthorsQuery' }),
   graphql(addBookMutation, { name: 'addBookMutation' })
 );
 
-export default Queries(AddBook)
+export default connectQueries(AddBook)
