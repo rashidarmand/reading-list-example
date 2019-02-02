@@ -13,7 +13,9 @@ class AddBook extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.addBookMutation({...this.state});
+    this.props.addBookMutation({
+      variables : { ...this.state }
+    });
   }
 
   displayAuthors = () => {
