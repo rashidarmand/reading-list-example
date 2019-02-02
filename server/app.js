@@ -3,6 +3,7 @@ const graphqlHTTP = require('express-graphql');
 const schema = require('./schema/schema');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const { mongoConnectionString } = require('./private');
 
 const app = express();
 
@@ -10,11 +11,12 @@ const app = express();
 app.use(cors());
 
 // Connect to MongoDB Atlas db cluster
-mongoose.connect('mongodb+srv://rashid-armand:Brooklyn_718@fcc-graphql-amwpq.mongodb.net/fcc-graphql?retryWrites=true', { useNewUrlParser: true });
+mongoose.connect(mongoConnectionString, { useNewUrlParser: true });
 mongoose.connection.once('open', () => {
   console.log('Connected to database.');
 })
 
+// Let app use express-graphql middleware
 app.use('/graphql', graphqlHTTP({
   schema,
   graphiql: true
