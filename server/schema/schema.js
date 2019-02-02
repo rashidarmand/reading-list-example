@@ -12,4 +12,4 @@ const BookType = new GraphQLObjectType({
     name: { type: GraphQLString },
     genre: { type: GraphQLString }
   })
-})
+});
