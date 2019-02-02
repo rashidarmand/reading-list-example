@@ -13,6 +13,9 @@ class AddBook extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    const emptyFields = Object.keys(this.state).some(key => this.state[key] === '');
+    if(emptyFields) return;
+    
     this.props.addBookMutation({
       variables : { ...this.state },
       refetchQueries: [{ query: getBooksQuery }]
