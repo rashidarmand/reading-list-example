@@ -28,9 +28,3 @@ app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 })
 
-
-/*
-  @TODO:
-    - deploy the server to heroku
-    - deploy the front end using surge
-*/
