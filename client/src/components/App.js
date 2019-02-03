@@ -7,7 +7,7 @@ import AddBook from './AddBook';
 
 // Apollo client setup
 const client = new ApolloClient({
-  uri: uri.local
+  uri: uri.prod // production uri
 });
 
 class App extends Component {
